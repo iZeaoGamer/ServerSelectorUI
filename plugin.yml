@@ -5,5 +5,5 @@ version: 0.0.2
 author: BajanVlogs
 
 commands:
- server:
+ servers:
   description: "This is for transfering servers using CustomUI"
