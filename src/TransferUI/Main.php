@@ -1,7 +1,5 @@
 <?php
-
 namespace TransferUI;
-
 use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
@@ -11,7 +9,6 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\ConsoleCommandSender;
-
 class Main extends PluginBase implements Listener {
 	
     public function onEnable() {
@@ -39,13 +36,14 @@ class Main extends PluginBase implements Listener {
 							break;
 								
 							case 2:
-								$command = "transferserver voidfactionspe.ml 19132"
+								$command = "transferserver voidfactionspe.ml 19132";
 								$this->getServer()->getCommandMap()->dispatch($sender, $command);
-						        break:
+						        break;
 							
 							case 3:
-								$command = "transferserver voidkitpvppe.ml 25625"
-								$this->getServer()->getCommandMap()dispatch($sender, $command);
+								$command = "transferserver voidkitpvppe.ml 25625";
+								$this->getServer()->getCommandMap()->dispatch($sender, $command);
+							break;
               
 								
 						}
