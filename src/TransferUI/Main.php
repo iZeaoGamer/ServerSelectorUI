@@ -51,7 +51,7 @@ class Main extends PluginBase implements Listener {
 					$form->setTitle("§a§lServer Selector!");
 					$form->setContent("§bPlease choose a server to teleport to!");
 					$form->addButton(TextFormat::BOLD . "§6§lVoid§bPrisons§cPE (§dTap Me!)");
-					$form->addButton(TextFomat::BOLD . "§6§lVoid§bFactions§cPE (§dTap Me!)");
+					$form->addButton(TextFormat::BOLD . "§6§lVoid§bFactions§cPE (§dTap Me!)");
 					$form->addButton(TextFormat::BOLD . "§6§lVoid§bKitPvP§cPE (§dTap me!)");
 					$form->sendToPlayer($sender);
 				}
