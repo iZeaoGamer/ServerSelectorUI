@@ -21,9 +21,9 @@ class Main extends PluginBase implements Listener {
 		}
     }
 	
-    public function onCommand(CommandSender $sender, Command $cmd, string $label,array $args) : bool {
+    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool {
 		switch($cmd->getName()){
-			case "server":
+			case "servers":
 				if($sender instanceof Player) {
 					$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
 					$form = $api->createSimpleForm(function (Player $sender, array $data){
@@ -33,17 +33,28 @@ class Main extends PluginBase implements Listener {
 						return true;
 					}
 						switch($result){
-							case 0:
-								$command = "transferserver 147.135.233.227 19132";
+							case 1:
+								$command = "transferserver voidprisonspe.ml 25647";
 								$this->getServer()->getCommandMap()->dispatch($sender, $command);
 							break;
+								
+							case 2:
+								$command = "transferserver voidfactionspe.ml 19132"
+								$this->getServer()->getCommandMap()->dispatch($sender, $command);
+						        break:
+							
+							case 3:
+								$command = "transferserver voidkitpvppe.ml 25625"
+								$this->getServer()->getCommandMap()dispatch($sender, $command);
               
 								
 						}
 					});
-					$form->setTitle("TransferUI Screen");
-					$form->setContent("Please choose your server.");
-					$form->addButton(TextFormat::BOLD . "§c§lRebirth§b§lPE §a§lMinigames");	                          	
+					$form->setTitle("§a§lServer Selector!");
+					$form->setContent("§bPlease choose a server to teleport to!");
+					$form->addButton(TextFormat::BOLD . "§6§lVoid§bPrisons§cPE (§dTap Me!)");
+					$form->addButton(TextFomat::BOLD . "§6§lVoid§bFactions§cPE (§dTap Me!)");
+					$form->addButton(TextFormat::BOLD . "§6§lVoid§bKitPvP§cPE (§dTap me!)");
 					$form->sendToPlayer($sender);
 				}
 				else{
