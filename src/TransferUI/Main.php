@@ -30,17 +30,17 @@ class Main extends PluginBase implements Listener {
 						return true;
 					}
 						switch($result){
-							case 1:
+							case 0:
 								$command = "transferserver voidprisonspe.ml 25647";
 								$this->getServer()->getCommandMap()->dispatch($sender, $command);
 							break;
 								
-							case 2:
+							case 1:
 								$command = "transferserver voidfactionspe.ml 19132";
 								$this->getServer()->getCommandMap()->dispatch($sender, $command);
 						        break;
 							
-							case 3:
+							case 2:
 								$command = "transferserver voidkitpvppe.ml 25625";
 								$this->getServer()->getCommandMap()->dispatch($sender, $command);
 							break;
