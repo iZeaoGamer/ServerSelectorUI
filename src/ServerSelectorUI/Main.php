@@ -18,37 +18,37 @@ use pocketmine\item\Item;
 
 class Main extends PluginBase implements Listener {
 	
-    public function onEnable() : void {
+    protected function onEnable(): void {
 		$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
 		if($api === null){
 			$this->getServer()->getPluginManager()->disablePlugin($this);			
 		}
     }
-    public function onDamageDisable(EntityDamageEvent $event){
+    public function onDamageDisable(EntityDamageEvent $event): void {
         if($event->getCause() === EntityDamageEvent::CAUSE_FALL){
             $event->setCancelled(true);
         }
     }
-  public function onPlaceDisable(BlockPlaceEvent $event) {
+  public function onPlaceDisable(BlockPlaceEvent $event): void {
         $event->setCancelled(true);
     }
-    public function onBreakDisable(BlockBreakEvent $event) {
+    public function onBreakDisable(BlockBreakEvent $event): void {
 		$event->setCancelled(true);
     }
-    public function HungerDisable(PlayerExhaustEvent $event) {
+    public function HungerDisable(PlayerExhaustEvent $event): void {
         $event->setCancelled(true);
     }
-    public function DropItemDisable(PlayerDropItemEvent $event){
+    public function DropItemDisable(PlayerDropItemEvent $event): void {
         $event->setCancelled(true);
     }
-    public function onConsumeDisable(PlayerItemConsumeEvent $event){
+    public function onConsumeDisable(PlayerItemConsumeEvent $event): void {
         $event->setCancelled(true);
     }
-    public function onJoin(PlayerJoinEvent $event){
+    public function onJoin(PlayerJoinEvent $event): void {
 	    $player = $event->getPlayer();
 	     $player->getInventory()->setItem(2, Item::get(345)->setCustomName("§a§lServer Selector"));
     }
-    public function onInteract(PlayerInteractEvent $event){
+    public function onInteract(PlayerInteractEvent $event): bool { //Check to see if this is correct.
 	   $player = $event->getPlayer();
 	    $item = $event->getItem();
 	    if($item->getCustomName() == "§a§lServer Selector"){
@@ -87,12 +87,12 @@ class Main extends PluginBase implements Listener {
 					$form->sendToPlayer($player);
 	    }
     }
-    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool {
-		switch($cmd->getName()){
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool {
+		switch($command->getName()){
 			case "servers":
 				if($sender instanceof Player) {
 					$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-					$form = $api->createSimpleForm(function (Player $sender, array $data){
+					$form = $api->createSimpleForm(function (Player $sender, $data){
 					$result = $data[0];
 					
 					if($result === null){
@@ -100,18 +100,20 @@ class Main extends PluginBase implements Listener {
 					}
 						switch($result){
 							case 0:
-								$command = "transferserver voidprisonspe.ml 25647";
+								$command = "transferserver factions.voidminerpe.ml 25655";
 								$this->getServer()->getCommandMap()->dispatch($sender, $command);
 							break;
 								
 							case 1:
-								$command = "transferserver voidfactionspe.ml 19132";
+								$command = "transferserver factions2.voidminerpe.ml 25584";
 								$this->getServer()->getCommandMap()->dispatch($sender, $command);
 						        break;
 							
 							case 2:
-								$command = "transferserver voidkitpvppe.ml 25625";
-								$this->getServer()->getCommandMap()->dispatch($sender, $command);
+								$sender->sendMessage(TextFormat::RED . "Coming soon");
+								return true;
+								//$command = ""; 
+								//$this->getServer()->getCommandMap()->dispatch($sender, $command);
 							break;
               
 								
@@ -119,9 +121,9 @@ class Main extends PluginBase implements Listener {
 					});
 					$form->setTitle("§a§lServer Selector!");
 					$form->setContent("§bPlease choose a server to teleport to!");
-					$form->addButton(TextFormat::BOLD . "§6§lVoid§bPrisons§cPE (§dTap Me!)");
-					$form->addButton(TextFormat::BOLD . "§6§lVoid§bFactions§cPE (§dTap Me!)");
-					$form->addButton(TextFormat::BOLD . "§6§lVoid§bKitPvP§cPE (§dTap me!)");
+					$form->addButton(TextFormat::BOLD . "§3OP §bFactions\n§a§lONLINE");
+					$form->addButton(TextFormat::BOLD . "§3Normal §bFactions\n§a§lONLINE");
+					$form->addButton(TextFormat::BOLD . "§5Prisons\n§c§lComing Soon");
 					$form->sendToPlayer($sender);
 				}
 				else{
