@@ -5,8 +5,9 @@ namespace ServerSelectorUI;
 use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\event\block\{BlockBreakEvent, BlockPlaceEvent};
+use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\player\{PlayerJoinEvent, PlayerInteractEvent, PlayerExhaustEvent, PlayerDropItemEvent, PlayerItemComsumeEvent};
 use pocketmine\utils\TextFormat;
 use pocketmine\Player;
 use pocketmine\command\Command;
@@ -22,6 +23,26 @@ class Main extends PluginBase implements Listener {
 		if($api === null){
 			$this->getServer()->getPluginManager()->disablePlugin($this);			
 		}
+    }
+    public function onDamageDisable(EntityDamageEvent $event){
+        if($event->getCause() === EntityDamageEvent::CAUSE_FALL){
+            $event->setCancelled(true);
+        }
+    }
+  public function onPlaceDisable(BlockPlaceEvent $event) {
+        $event->setCancelled(true);
+    }
+    public function onBreakDisable(BlockBreakEvent $event) {
+		$event->setCancelled(true);
+    }
+    public function HungerDisable(PlayerExhaustEvent $event) {
+        $event->setCancelled(true);
+    }
+    public function DropItemDisable(PlayerDropItemEvent $event){
+        $event->setCancelled(true);
+    }
+    public function onConsumeDisable(PlayerItemConsumeEvent $event){
+        $event->setCancelled(true);
     }
     public function onJoin(PlayerJoinEvent $event){
 	    $player = $event->getPlayer();
