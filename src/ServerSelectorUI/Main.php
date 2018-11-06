@@ -21,7 +21,7 @@ class Main extends PluginBase implements Listener {
     public function registerEvents(): void {
 	    $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
-    public function onEnable() : void {
+    protected function onEnable(): void {
 	    $this->registerEvents();
       
 		$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
