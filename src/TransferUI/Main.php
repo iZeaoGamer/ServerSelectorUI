@@ -63,7 +63,6 @@ class Main extends PluginBase implements Listener {
 					$form->addButton(TextFormat::BOLD . "§5Prisons\n§c§lComing Soon");
 					$form->sendToPlayer($player);
 	    }
-	    break;
     }
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool {
 		switch($cmd->getName()){
