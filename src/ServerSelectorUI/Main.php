@@ -18,7 +18,12 @@ use pocketmine\item\Item;
 
 class Main extends PluginBase implements Listener {
 	
-    protected function onEnable(): void {
+    public function registerEvents(): void {
+	    $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
+    public function onEnable() : void {
+	    $this->registerEvents();
+      
 		$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
 		if($api === null){
 			$this->getServer()->getPluginManager()->disablePlugin($this);			
