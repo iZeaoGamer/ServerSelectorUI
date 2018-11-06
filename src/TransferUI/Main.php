@@ -4,6 +4,7 @@ use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\utils\TextFormat;
 use pocketmine\Player;
 use pocketmine\command\Command;
@@ -14,7 +15,7 @@ use pocketmine\item\Item;
 
 class Main extends PluginBase implements Listener {
 	
-    public function onEnable() {
+    public function onEnable() : void {
 		$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
 		if($api === null){
 			$this->getServer()->getPluginManager()->disablePlugin($this);			
@@ -57,9 +58,9 @@ class Main extends PluginBase implements Listener {
 					});
 					$form->setTitle("§a§lServer Selector!");
 					$form->setContent("§bPlease choose a server to teleport to!");
-					$form->addButton(TextFormat::BOLD . "§aOP §bFactions (§dTap Me!)");
-					$form->addButton(TextFormat::BOLD . "§aNormal §bFactions (§dTap Me!)");
-					$form->addButton(TextFormat::BOLD . "§aPrisons (§cComing soon!)");
+					$form->addButton(TextFormat::BOLD . "§3OP §bFactions\n§a§lONLINE");
+					$form->addButton(TextFormat::BOLD . "§3Normal §bFactions\n§a§lONLINE");
+					$form->addButton(TextFormat::BOLD . "§5Prisons\n§c§lComing Soon");
 					$form->sendToPlayer($player);
 	    }
 	    break;
