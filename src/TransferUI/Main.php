@@ -3,12 +3,15 @@ namespace TransferUI;
 use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\utils\TextFormat;
 use pocketmine\Player;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\ConsoleCommandSender;
+use pocketmine\item\Item;
+
 class Main extends PluginBase implements Listener {
 	
     public function onEnable() {
@@ -17,7 +20,50 @@ class Main extends PluginBase implements Listener {
 			$this->getServer()->getPluginManager()->disablePlugin($this);			
 		}
     }
-	
+    public function onJoin(PlayerJoinEvent $event){
+	    $player = $event->getPlayer();
+	     $player->getInventory()->setItem(2, Item::get(345)->setCustomName("§a§lServer Selector"));
+    }
+    public function onInteract(PlayerInteractEvent $event){
+	   $player = $event->getPlayer();
+	    $item = $event->getItem();
+	    if($item->getCustomName() == "§a§lServer Selector"){
+		$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
+					$form = $api->createSimpleForm(function (Player $player, $data){
+					$result = $data[0];
+					
+					if($result === null){
+						return true;
+					}
+						switch($result){
+							case 0:
+								$command = "transferserver factions.voidminerpe.ml 25655";
+								$this->getServer()->getCommandMap()->dispatch($player, $command);
+							break;
+								
+							case 1:
+								$command = "transferserver factions2.voidminerpe.ml 25584";
+								$this->getServer()->getCommandMap()->dispatch($player, $command);
+						        break;
+							
+							case 2:
+								$player->sendMessage(TextFormat::RED . "Coming soon");
+								//$command = "";
+								//$this->getServer()->getCommandMap()->dispatch($player, $command);
+							break;
+              
+								
+						}
+					});
+					$form->setTitle("§a§lServer Selector!");
+					$form->setContent("§bPlease choose a server to teleport to!");
+					$form->addButton(TextFormat::BOLD . "§aOP §bFactions (§dTap Me!)");
+					$form->addButton(TextFormat::BOLD . "§aNormal §bFactions (§dTap Me!)");
+					$form->addButton(TextFormat::BOLD . "§aPrisons (§cComing soon!)");
+					$form->sendToPlayer($player);
+	    }
+	    break;
+    }
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool {
 		switch($cmd->getName()){
 			case "servers":
