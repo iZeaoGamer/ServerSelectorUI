@@ -1,5 +1,7 @@
 <?php
-namespace TransferUI;
+
+namespace ServerSelectorUI;
+
 use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
