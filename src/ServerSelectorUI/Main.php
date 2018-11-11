@@ -56,7 +56,7 @@ class Main extends PluginBase implements Listener {
 	    $item = $event->getItem();
 	    if($item->getCustomName() == "§a§lServer Selector"){
 		$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
-					$form = $api->createSimpleForm(function (Player $player, $data){
+					$form = $api->createSimpleForm(function (Player $sender, $data){
 					$result = $data[0];
 					
 					if($result === null){
@@ -73,7 +73,7 @@ class Main extends PluginBase implements Listener {
 						        break;
 							
 							case 2:
-								$player->sendMessage(TextFormat::RED . "Coming soon");
+								$sender->sendMessage(TextFormat::RED . "Coming soon");
 								//$command = "";
 								//$this->getServer()->getCommandMap()->dispatch($player, $command);
 							break;
@@ -86,7 +86,7 @@ class Main extends PluginBase implements Listener {
 					$form->addButton(TextFormat::BOLD . "§3OP §bFactions\n§a§lONLINE");
 					$form->addButton(TextFormat::BOLD . "§3Normal §bFactions\n§a§lONLINE");
 					$form->addButton(TextFormat::BOLD . "§5Prisons\n§c§lComing Soon");
-					$form->sendToPlayer($player);
+					$form->sendToPlayer($sender);
 	    }
     }
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool {
